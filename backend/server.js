@@ -14,15 +14,22 @@ connectDB();
 const app = express();
 
 // ============================================
+// IMPORT ROUTES
+// ============================================
+const loginRoutes = require('./routes/loginRoutes');
+// const movieRoutes = require('./routes/movieRoutes');
+// const recommendationRoutes = require('./routes/recommendationRoutes');
+// const watchHistoryRoutes = require('./routes/watchHistoryRoutes');
+// const watchPartyRoutes = require('./routes/watchPartyRoutes');
+
+// ============================================
 // MIDDLEWARE
 // ============================================
 
 // Enable CORS - allows frontend to communicate with backend
-// This permits requests from different origins (e.g., React dev server on port 3000)
 app.use(cors());
 
 // Parse JSON request bodies
-// This allows us to access req.body in our routes
 app.use(express.json());
 
 // Parse URL-encoded bodies (for form submissions)
@@ -51,23 +58,23 @@ app.get('/api/health', (req, res) => {
 });
 
 // ============================================
-// API ROUTES (will be added as we build)
+// API ROUTES
 // ============================================
 
-// Authentication routes (login, register, etc.)
-// app.use('/api/auth', require('./routes/auth'));
+// Login/Authentication routes
+app.use('/api/login', loginRoutes);
 
-// Movie routes (search, get details, etc.)
-// app.use('/api/movies', require('./routes/movies'));
+// Movie routes (will add next)
+// app.use('/api/movies', movieRoutes);
 
-// Recommendation routes (AI-powered suggestions)
-// app.use('/api/recommendations', require('./routes/recommendations'));
+// Recommendation routes
+// app.use('/api/recommendations', recommendationRoutes);
 
-// Watch history routes (user's watched movies)
-// app.use('/api/watchhistory', require('./routes/watchHistory'));
+// Watch history routes
+// app.use('/api/watchhistory', watchHistoryRoutes);
 
-// Watch party routes (group recommendations)
-// app.use('/api/watchparty', require('./routes/watchParty'));
+// Watch party routes
+// app.use('/api/watchparty', watchPartyRoutes);
 
 // ============================================
 // ERROR HANDLING
@@ -100,7 +107,7 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 // Start listening for requests
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
 
