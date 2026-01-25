@@ -17,7 +17,7 @@ const app = express();
 // IMPORT ROUTES
 // ============================================
 const loginRoutes = require('./routes/loginRoutes');
-// const movieRoutes = require('./routes/movieRoutes');
+const movieRoutes = require('./routes/movieRoutes');
 // const recommendationRoutes = require('./routes/recommendationRoutes');
 // const watchHistoryRoutes = require('./routes/watchHistoryRoutes');
 // const watchPartyRoutes = require('./routes/watchPartyRoutes');
@@ -63,9 +63,8 @@ app.get('/api/health', (req, res) => {
 
 // Login/Authentication routes
 app.use('/api/login', loginRoutes);
-
 // Movie routes (will add next)
-// app.use('/api/movies', movieRoutes);
+app.use('/api/movies', movieRoutes);
 
 // Recommendation routes
 // app.use('/api/recommendations', recommendationRoutes);
