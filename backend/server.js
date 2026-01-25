@@ -19,7 +19,7 @@ const app = express();
 const loginRoutes = require('./routes/loginRoutes');
 const movieRoutes = require('./routes/movieRoutes');
 // const recommendationRoutes = require('./routes/recommendationRoutes');
-// const watchHistoryRoutes = require('./routes/watchHistoryRoutes');
+const watchHistoryRoutes = require('./routes/watchHistoryRoutes');
 // const watchPartyRoutes = require('./routes/watchPartyRoutes');
 
 // ============================================
@@ -57,20 +57,13 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// ============================================
 // API ROUTES
-// ============================================
-
-// Login/Authentication routes
 app.use('/api/login', loginRoutes);
-// Movie routes (will add next)
 app.use('/api/movies', movieRoutes);
 
 // Recommendation routes
 // app.use('/api/recommendations', recommendationRoutes);
-
-// Watch history routes
-// app.use('/api/watchhistory', watchHistoryRoutes);
+app.use('/api/watchhistory', watchHistoryRoutes);
 
 // Watch party routes
 // app.use('/api/watchparty', watchPartyRoutes);
