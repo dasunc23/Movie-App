@@ -120,7 +120,6 @@ watchPartySchema.pre('save', function (next) {
   if (!this.inviteCode) {
     this.inviteCode = this.generateInviteCode();
   }
-  next();
 });
 
 /**

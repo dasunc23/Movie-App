@@ -20,7 +20,7 @@ const loginRoutes = require('./routes/loginRoutes');
 const movieRoutes = require('./routes/movieRoutes');
 const recommendationRoutes = require('./routes/recommendationRoutes');
 const watchHistoryRoutes = require('./routes/watchHistoryRoutes');
-// const watchPartyRoutes = require('./routes/watchPartyRoutes');
+const watchPartyRoutes = require('./routes/watchPartyRoutes');
 
 // ============================================
 // MIDDLEWARE
@@ -62,9 +62,7 @@ app.use('/api/login', loginRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/recommendations', recommendationRoutes);
 app.use('/api/watchhistory', watchHistoryRoutes);
-
-// Watch party routes
-// app.use('/api/watchparty', watchPartyRoutes);
+app.use('/api/watchparty', watchPartyRoutes);
 
 // ============================================
 // ERROR HANDLING
