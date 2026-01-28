@@ -9,6 +9,8 @@ import AIRecommend from './pages/AIRecommend';
 import Search from './pages/Search';
 import MovieDetails from './pages/MovieDetail';
 import Watchlist from './pages/Watchlist';
+import WatchParty from './pages/WatchParty';
+import WatchPartyDetails from './pages/WatchPartyDetails';
 import { Loader } from './components/common';
 
 // Protected Route Component
@@ -82,7 +84,18 @@ function AppRoutes() {
             </ProtectedRoute>
           } />
 
-          {/* Catch all - redirect to home */}
+          <Route path="/watch-parties" element={
+            <ProtectedRoute>
+              <WatchParty />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/watch-party/:id" element={
+            <ProtectedRoute>
+              <WatchPartyDetails />
+            </ProtectedRoute>
+          } />
+                    {/* Catch all - redirect to home */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
