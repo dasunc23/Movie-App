@@ -5,6 +5,7 @@ import { Navbar } from './components/layout/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
+import AIRecommend from './pages/AIRecommend';
 import { Loader } from './components/common';
 
 // Protected Route Component
@@ -51,6 +52,12 @@ function AppRoutes() {
           <Route path="/" element={
             <ProtectedRoute>
               <Home />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/ai-recommend" element={
+            <ProtectedRoute>
+              <AIRecommend />
             </ProtectedRoute>
           } />
 
