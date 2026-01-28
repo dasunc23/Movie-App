@@ -21,6 +21,7 @@ const movieRoutes = require('./routes/movieRoutes');
 const recommendationRoutes = require('./routes/recommendationRoutes');
 const watchHistoryRoutes = require('./routes/watchHistoryRoutes');
 const watchPartyRoutes = require('./routes/watchPartyRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 // ============================================
 // MIDDLEWARE
@@ -63,7 +64,7 @@ app.use('/api/movies', movieRoutes);
 app.use('/api/recommendations', recommendationRoutes);
 app.use('/api/watchhistory', watchHistoryRoutes);
 app.use('/api/watchparty', watchPartyRoutes);
-
+app.use('/api/admin', adminRoutes);
 // ============================================
 // ERROR HANDLING
 // ============================================

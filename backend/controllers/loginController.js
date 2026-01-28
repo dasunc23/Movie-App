@@ -59,6 +59,7 @@ exports.register = async (req, res) => {
         name: user.name,
         email: user.email,
         avatar: user.avatar,
+        role: user.role,
         token // Send token so user is automatically logged in
       }
     });
@@ -124,6 +125,7 @@ exports.login = async (req, res) => {
         email: user.email,
         avatar: user.avatar,
         preferences: user.preferences,
+        role: user.role,
         token
       }
     });
@@ -164,6 +166,7 @@ exports.getProfile = async (req, res) => {
         email: user.email,
         avatar: user.avatar,
         preferences: user.preferences,
+        role: user.role,
         isActive: user.isActive,
         createdAt: user.createdAt
       }

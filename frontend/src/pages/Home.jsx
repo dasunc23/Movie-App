@@ -80,14 +80,14 @@ const Home = () => {
             AI-powered recommendations based on your mood and preferences
           </p>
 
-            <Button
+          <Button
               variant="primary"
               size="lg"
               onClick={() => navigate('/ai-recommend')}  
-              className="px-10 py-4 text-base shadow-lg hover:shadow-primary-500/40 transition"
-            >
+              className="px-10 py-4 text-base shadow-lg hover:shadow-primary-600/40 transition"
+          >
               🤖 Get AI Recommendations
-            </Button>
+          </Button>
         </div>
       </section>
 

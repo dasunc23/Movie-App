@@ -42,6 +42,11 @@ export const Navbar = () => {
               <Link to="/watch-parties" className="text-gray-300 hover:text-white transition-colors">
                 Watch Parties
               </Link>
+              {isAuthenticated && user?.role === 'admin' && (
+              <Link to="/admin" className="text-red-400 hover:text-red-300 transition-colors">
+                Admin
+              </Link>
+              )}
             </div>
           )}
 

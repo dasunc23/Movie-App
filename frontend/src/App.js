@@ -11,6 +11,7 @@ import MovieDetails from './pages/MovieDetail';
 import Watchlist from './pages/Watchlist';
 import WatchParty from './pages/WatchParty';
 import WatchPartyDetails from './pages/WatchPartyDetails';
+import AdminDashboard from './pages/AdminDashboard';
 import { Loader } from './components/common';
 
 // Protected Route Component
@@ -93,6 +94,12 @@ function AppRoutes() {
           <Route path="/watch-party/:id" element={
             <ProtectedRoute>
               <WatchPartyDetails />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <AdminDashboard />
             </ProtectedRoute>
           } />
                     {/* Catch all - redirect to home */}

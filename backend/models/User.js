@@ -38,6 +38,13 @@ const userSchema = new mongoose.Schema(
       select: false // Don't include password in queries by default (security)
     },
 
+        // Add role
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user'
+    },
+
     // User's movie preferences (genres they like)
     preferences: {
       genres: {
