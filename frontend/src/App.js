@@ -6,6 +6,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import AIRecommend from './pages/AIRecommend';
+import Search from './pages/Search';
+import MovieDetails from './pages/MovieDetail';
+import Watchlist from './pages/Watchlist';
 import { Loader } from './components/common';
 
 // Protected Route Component
@@ -58,6 +61,24 @@ function AppRoutes() {
           <Route path="/ai-recommend" element={
             <ProtectedRoute>
               <AIRecommend />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/search" element={
+            <ProtectedRoute>
+              <Search />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/movie/:id" element={
+            <ProtectedRoute>
+              <MovieDetails />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/watchlist" element={
+            <ProtectedRoute>
+              <Watchlist />
             </ProtectedRoute>
           } />
 
