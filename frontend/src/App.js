@@ -14,14 +14,13 @@ import WatchPartyDetails from './pages/WatchPartyDetails';
 import AdminDashboard from './pages/AdminDashboard';
 import Browse from './pages/Browse';
 import { Footer } from './components/layout/Footer';
-import { Loader } from './components/common';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
-    return <Loader fullScreen />;
+    return null; // Don't render anything, let AppRoutes handle loading
   }
 
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -32,99 +31,111 @@ const PublicRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
-    return <Loader fullScreen />;
+    return null; // Don't render anything, let AppRoutes handle loading
   }
 
   return !isAuthenticated ? children : <Navigate to="/" />;
 };
 
 function AppRoutes() {
-  return (
-    <Router>
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-black text-white">
-        <Navbar />
-        <main className="flex-1">
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/login" element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            } />
-            <Route path="/register" element={
-              <PublicRoute>
-                <Register />
-              </PublicRoute>
-            } />
+  const { loading } = useAuth();
 
-            {/* Protected Routes */}
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            } />
-
-            <Route path="/ai-recommend" element={
-              <ProtectedRoute>
-                <AIRecommend />
-              </ProtectedRoute>
-            } />
-
-            <Route path="/search" element={
-              <ProtectedRoute>
-                <Search />
-              </ProtectedRoute>
-            } />
-
-            <Route path="/movie/:id" element={
-              <ProtectedRoute>
-                <MovieDetails />
-              </ProtectedRoute>
-            } />
-
-            <Route path="/watchlist" element={
-              <ProtectedRoute>
-                <Watchlist />
-              </ProtectedRoute>
-            } />
-
-            <Route path="/watch-parties" element={
-              <ProtectedRoute>
-                <WatchParty />
-              </ProtectedRoute>
-            } />
-
-            <Route path="/watch-party/:id" element={
-              <ProtectedRoute>
-                <WatchPartyDetails />
-              </ProtectedRoute>
-            } />
-
-            <Route path="/browse/:type" element={
-              <ProtectedRoute>
-                <Browse />
-              </ProtectedRoute>
-            } />
-
-            <Route path="/admin" element={
-              <ProtectedRoute>
-                <AdminDashboard />
-              </ProtectedRoute>
-            } />
-                      {/* Catch all - redirect to home */}
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </main>
-        <Footer />
+  // Show ONLY background and loader during initial load
+  if (loading) {
+    return (
+      <div className="fixed inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-black flex items-center justify-center z-50">
+        <div className="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full animate-spin" />
       </div>
-    </Router>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-black text-white flex flex-col">
+      <Navbar />
+      <main className="flex-1">
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/login" element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          } />
+          <Route path="/register" element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          } />
+
+          {/* Protected Routes */}
+          <Route path="/" element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/ai-recommend" element={
+            <ProtectedRoute>
+              <AIRecommend />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/search" element={
+            <ProtectedRoute>
+              <Search />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/movie/:id" element={
+            <ProtectedRoute>
+              <MovieDetails />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/watchlist" element={
+            <ProtectedRoute>
+              <Watchlist />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/watch-parties" element={
+            <ProtectedRoute>
+              <WatchParty />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/watch-party/:id" element={
+            <ProtectedRoute>
+              <WatchPartyDetails />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/browse/:type" element={
+            <ProtectedRoute>
+              <Browse />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          
+          {/* Catch all - redirect to home */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
 function App() {
   return (
     <AuthProvider>
-      <AppRoutes />
+      <Router>
+        <AppRoutes />
+      </Router>
     </AuthProvider>
   );
 }
