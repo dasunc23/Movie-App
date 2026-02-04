@@ -4,13 +4,13 @@ const jwt = require('jsonwebtoken');
 
 /**
  * HELPER FUNCTION: Generate JWT Token
- * Creates a token that expires in 30 days
+ * Creates a token that expires in 300 days
  * @param {String} id - User ID
  * @returns {String} - JWT token
  */
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '30d' // Token expires in 30 days
+    expiresIn: '300d' // Token expires in 300 days
   });
 };
 
@@ -91,7 +91,6 @@ exports.login = async (req, res) => {
     }
 
     // Find user by email and include password field
-    // (password has select: false in model, so we need to explicitly include it)
     const user = await User.findOne({ email }).select('+password');
 
     // Check if user exists
@@ -130,13 +129,31 @@ exports.login = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({
+  console.error('Register error:', error);
+
+  // Mongoose validation error
+  if (error.name === 'ValidationError') {
+    const firstError = Object.values(error.errors)[0].message;
+    return res.status(400).json({
       success: false,
-      message: 'Error logging in',
-      error: error.message
+      message: firstError
     });
   }
+
+  // Duplicate email error
+  if (error.code === 11000) {
+    return res.status(400).json({
+      success: false,
+      message: 'Email already exists'
+    });
+  }
+
+  res.status(500).json({
+    success: false,
+    message: 'Server error'
+  });
+}
+
 };
 
 /**

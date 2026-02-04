@@ -11,7 +11,6 @@ exports.protect = async (req, res, next) => {
     let token;
 
     // Check if Authorization header exists and starts with "Bearer"
-    // Example header: "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith('Bearer')
